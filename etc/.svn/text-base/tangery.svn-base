@@ -1,9 +1,0 @@
-# Defaults for tangery initscript
-# This file is sourced bysourced by /bin/sh from
-# /etc/init.d/tangery
-
-# DEFAULT PORT TO LISTEN ON
-# PORT='22122'
-# BIND='127.0.0.1'
-
-
