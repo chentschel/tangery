@@ -4,7 +4,7 @@ import syslog
 
 from collections import deque
 
-LOG_SOFT_MAX_SIZE = (1 << 19) #5 MB
+LOG_SOFT_MAX_SIZE = 16 * (1024**2) #Queue will wait to rotate until is empty after 16MB
 
 CMD_APPEND  = 0x00
 CMD_POPLEFT = 0x01
@@ -86,5 +86,5 @@ class PersistentQueue(deque):
         cPickle.dump(data, self.logfile, -1)
         self.logsize += len(data)
 
-        if self.logsize > LOG_SOFT_MAX_SIZE and len(self) == 1:
+        if self.logsize > LOG_SOFT_MAX_SIZE and len(self) == 0:
             self.rotateLog()
