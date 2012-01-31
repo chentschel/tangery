@@ -83,8 +83,9 @@ class PersistentQueue(deque):
             raise "No transaction logfile."
         
         #@TODO: HAVE TO MAKE THIS ASYNC OR NON-BLOCKING IO.
-        cPickle.dump(data, self.logfile, -1)
-        self.logsize += sum(map(len, data))
+        pstring = cPickle.dumps(data, -1)
+        self.logfile.write(pstring)
+        self.logsize += len(pstring)
 
         if self.logsize > LOG_SOFT_MAX_SIZE and len(self) == 0:
             self.rotateLog()
