@@ -84,7 +84,7 @@ class PersistentQueue(deque):
         
         #@TODO: HAVE TO MAKE THIS ASYNC OR NON-BLOCKING IO.
         cPickle.dump(data, self.logfile, -1)
-        self.logsize += len(data)
+        self.logsize += sum(map(len, data))
 
         if self.logsize > LOG_SOFT_MAX_SIZE and len(self) == 0:
             self.rotateLog()
